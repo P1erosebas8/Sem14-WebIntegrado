@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class HomePage {
-
+  cargando = false;
+  mensaje = '';
+  error = '';
   enviado = false;
   registroForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -41,5 +43,14 @@ export class HomePage {
     this.router.navigate(['/detalle'], {
       queryParams: this.registroForm.value
     });
+  }
+  limpiarMensajes() {
+    this.mensaje = '';
+    this.error = '';
+  }
+  limpiarFormulario() {
+    this.registroForm.reset();
+    this.enviado = false;
+    this.limpiarMensajes();
   }
 }
